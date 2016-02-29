@@ -1,0 +1,18 @@
+#!/bin/bash
+echo "Compiling the EBB-ADC overlay from .dts to .dtbo"
+dtc -O dtb -o EBB-PRU-ADC-00A0.dtbo -b 0 -@ EBB-PRU-ADC.dts
+
+echo "Building the PRU Clock code"
+pasm -b PRUClock.p
+
+echo "Building the PRU ADC code"
+pasm -b PRUADC.p
+
+echo "Building the my_adc_tester application"
+make my_adc_tester
+
+echo "Building the my_fft_tester application"
+make my_fft_tester
+
+echo "Building mercator_navigator application"
+make mercator_navigator
